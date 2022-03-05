@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Data</title>
+    <style>
+        th,td{
+        border:1px black solid;
+        }
+    </style>
+</head>
+<body>
+{% if data_user %}
+<center>showing data</center>
+<center><h1>welcome all users</h1></center>
+    <table>
+        <tr>
+            <th>first name</th>
+            <th>last name</th>
+            <th>user name   </th>
+            <th>email id</th>
+        </tr>
+        <tr>
+
+                {%for datas in data_user%}
+        <tr>
+        <td>{{datas.first_name}}</td>
+        <td>{{ datas.last_name}}</td>
+        <td>{{datas.user_name}}</td>
+        <td>{{ datas.Email}}</td>
+                {% endfor%}
+    </tr>
+            </td>
+        </tr>
+
+    </table>
+{%else %}
+no data is present
+{% endif%}
+</body>
+</html>

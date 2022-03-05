@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Login Page</title>
+  </head>
+  <body>
+  <!-- lowering the position of the logi -->
+  <div class="alert alert-dark" role="alert">
+    <center> <h2>Login Page</h2></center>
+  </div>
+  <marquee direction="right"><h4>Please Enter the Valid <b>Username</b> And <b>Password</b> to Login in VIERP</h4></marquee>
+  <br><br> <br>
+  <br>
+  <br>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+  <center> <form method="post" action="{% url 'UserLogin' %}" > <!-- in action we can give function name or url -->
+      {% csrf_token %} <!-- it is used to avoid csrf error -->
+      {% if error %}
+      <h3>{{ error }}</h3>
+      {% endif %}
+         <div class="form-group col-md-4">
+      <input type="text" class="form-control" placeholder="Username" name="username" required autofocus>
+    </div>
+      <div class="form-group col-md-4">
+      <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="password" required autofocus>
+    </div>
+         <button type="submit" class="btn btn-primary">Login</button>
+
+       </form> </center>
+  <marquee direction="left"><h5>Not Registered click <a href="{% url 'register'%}">here</a> for the registration  </h5></marquee>
+
+</body>

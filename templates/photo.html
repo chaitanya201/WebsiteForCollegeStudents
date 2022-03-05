@@ -1,0 +1,17 @@
+
+
+<!DOCTYPE html>
+
+{% load static%}  <! -- this is used for loading the static files -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PHOTO</title>
+</head>
+<body>
+{% csrf_token %}
+<img src="{% static 'img.jpeg' %}" width="1400" height="800" alt="image is loading"> <!-- displays the static files -->
+
+</body>
+
+</html>

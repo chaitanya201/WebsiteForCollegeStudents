@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload questions </title>
+</head>
+<body>
+
+<center>
+    <h1>
+        "{{name}}" Can Add Questions Now
+    </h1>
+</center>
+
+<a href="{% url 'admin_back' admin_id %}">Back</a>
+<br>
+<br>
+<br>
+<form method="post" enctype="multipart/form-data" action="{% url 'que' admin_id %}">
+    {% csrf_token %}
+    Question :-
+    <input type="file" name="que1">
+    <br>
+    <br>
+    <input type="submit" value="Upload">
+
+</form>
+<br>
+<br>
+<br>
+
+{% if dic %}
+<center>
+    <h2>
+        {{dic.msg}} {{dic.que_id}}
+    </h2>
+</center>
+{% endif %}
+ {% if all_questions %}
+<table border="5" bgcolor="cyan">
+    <tr>
+        <td>
+        Sr.No
+        </td>
+
+        <td>
+            Question
+        </td>
+
+        <td>
+            Action
+        </td>
+
+        <td>
+            Responses
+        </td>
+
+        <td>
+            Marks
+        </td>
+
+        </tr>
+
+  {% for question in all_questions %}
+    <tr>
+        <td>
+            {{forloop.counter}}
+        </td>
+
+        <td>
+            <img src="{{question.questions.url}}" height="200" width="200" border="3"><br>
+        </td>
+
+        <td>
+            <a href="{% url 'delete_que' admin_id question.id %}" title="Delete question No {{question.id}}">Delete</a>
+        </td>
+
+
+
+                {% if all_answers %}
+                {% for answer in all_answers %}
+                {% if answer.question == question.id %}
+                {% for student in all_students %}
+                {% if student.id == answer.student_id %}
+        <tr>
+            <td>
+                {{student.Email}}
+                <img src="{{answer.answer.url}}" width="300" height="300" title="{{student.first_name}}'s Uploaded answer">
+                <a href="{{answer.answer.url}}">Show Full Answer</a>
+            </td>
+
+            <td>
+                <form method="get" action="{% url 'add_marks' student.id answer.question admin_id %}">
+                    <input type="number" name="mark" value="{{answer.marks}}">
+                    <input type="submit" value="Assign">
+                </form>
+            </td>
+
+        </tr>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+            {% endif %}
+
+
+    </tr>
+  {% endfor %}
+
+  {% else %}
+  <h3>No question were uploaded</h3>
+</table>
+  {% endif %}
+</body>
+</html>

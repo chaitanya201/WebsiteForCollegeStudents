@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Profile</title>
+
+  </head>
+  <body>
+  <!-- Below code is used to create the background colour -->
+  {% csrf_token %}
+
+    <center><h2 style="color:crimson;">Profile</h2></center>
+  <hr>
+  <center>
+
+      {% if u_profile %}
+
+            <img src="{{u_profile}}" class="rounded-circle"  height="120px" width="120px" alt="Profile is not uploaded" >
+
+      {% endif %}
+
+  </center>
+
+ <h3>Hello <i><big style="color:mediumspringgreen;font-size:38px;">"{{name}}"</big></i></h3>
+
+  <br>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+  <!--<img src="..." alt="...">
+       <img src="..." alt="..." class="rounded-circle">-->
+  <! -- form Profile -->
+
+  <form action="{% url 'ProfilePhoto' %}" method="post" enctype="multipart/form-data" >
+      {% csrf_token %}
+
+      <h5>Upload ProfilePhoto</h5>
+
+      <input type="file" name="profileisuploaded" >
+
+      <button type="submit" class="btn btn-primary">Upload</button>
+
+  </form>
+
+  <div style="position:absolute; top:200px; left:1200px;">
+      <a href="{% url 'photo' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Time Table</a>
+  </div>
+
+
+  <div >
+      <a href="{% url 'logout' %}"  style="position:absolute; top:80px; left:1200px;"class="btn btn-primary btn-lg active" role="button" aria-pressed="true">LOG OUT</a>
+  </div>
+{% csrf_token %}
+
+  <! -- form Pan Card -->
+<br>
+
+  <form action="{% url 'pancard' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <h5>Upload PanCard</h5>
+
+      <input type="file" name="panisuploaded" >
+
+      <button type="submit" class="btn btn-primary">Upload</button>
+
+
+     </form>
+
+
+  <! -- form Adhar card -->
+
+<br>
+  <form action="{% url 'adharcard' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <h5>Upload Aadhar Card</h5>
+
+      <input type="file" name="adarisuploaded">
+
+      <button type="submit" class="btn btn-primary">Upload</button>
+
+
+
+    </form>
+
+
+<br>
+
+
+
+<h5>Uploaded documents are below:-</h5>
+  <br>
+<pre><table title="Uploaded Documents" border="5">
+    <tr>
+        <th>
+            Pan Card
+        </th>
+        <th>
+            Adhar Card
+        </th>
+
+    </tr>
+    <td>
+        {% if u_pancard %}
+        <img src="{{u_pancard}}" alt="Pan Card is not uploaded" width="200" height="200">
+        <br>
+        <big><a href="{{u_pancard}}" download>Download PanCard</a></big>
+        {% endif %}
+    </td>
+    <td>
+        {% if u_adhar %}
+
+   <img src="{{u_adhar}}" height="200" width="200" alt="adhar Card is not uploaded">
+        <br>
+      <big><a href="{{u_adhar}}" download>Download AadharCard</a></big>
+
+  {% endif %}
+    </td>
+
+</table></pre>
+
+
+
+  </body>
+</html>

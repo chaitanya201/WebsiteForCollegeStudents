@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignments</title>
+</head>
+<body>
+<center><h1>Assignments</h1></center>
+<a href="{% url 'front' id %} ">Back</a>
+{% if questions %}
+<table border="2">
+    <tr>
+        <td>
+            Question
+        </td>
+
+        <td>
+            Action
+        </td>
+
+        <td>
+            Marks
+        </td>
+
+        <td>
+            See Your Response
+        </td>
+
+    </tr>
+{% for ques in questions %}
+    <tr>
+        <td>
+            <img src="{{ques.questions.url}}" height="200" border="5" width="200">
+            <a href="{{ques.questions.url}}">Show Full Question</a>
+        </td>
+
+        <td>
+            <form action="{% url 'ans' id ques.id admin_id %}" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <input type="file" name="ans">
+                <br>
+                <input type="submit" value="Upload">
+            </form>
+        </td>
+
+        <td>
+            {% if answers %}
+            {% for answer in answers %}
+            {% if answer.question == ques.id %}
+            <b>{{ answer.marks }}</b>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            <b>
+                No Marks are given till now.
+            </b>
+            {% endif %}
+        </td>
+
+        <td>
+            {% if answers %}
+            {% for answer in answers %}
+            {% if answer.question == ques.id %}
+            <img src="{{answer.answer.url}}" height="300" width="300">
+            <a href="{{answer.answer.url}}" title="show Que no.{{ques.id}} full answer ">Show Full answer</a>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            <b>
+                No answer is uploaded
+            </b>
+            {% endif %}
+
+
+        </td>
+    </tr>
+
+
+{% endfor %}
+    </table>
+{% endif %}
+</body>
+</html>

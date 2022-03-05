@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Edit Profile</title>
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+
+
+<div style="position:absolute; top:100px; left:150px;">
+      <a href="{% url 'front' id %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Back</a>
+  </div>
+
+<center><h1>Edit Profile Contents</h1></center>
+
+{% if msg %}
+
+<center><h1 style="background-color:red;">{{msg}}</h1></center>
+
+<center>
+<form action="{% url 'edit_details' id %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+    <label for="exampleFormControlInput1">First Name</label>
+    <input type="email" class="form-control"  placeholder="name@example.com">
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1">First Name</label>
+    <input type="email" class="form-control" value="user_data.first_name" >
+  </div>
+
+    <div class="form-group">
+    <label for="exampleFormControlInput1">First Name</label>
+    <input type="email" class="form-control" value="user_data.last_name">
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1">First Name</label>
+    <input type="email" class="form-control" >
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1">First Name</label>
+    <input type="email" class="form-control" value="user_data.Email">
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1">First Name</label>
+    <input type="email" class="form-control" >
+  </div>
+
+    <div>
+        <input type="submit" value="Edit Details">
+    </div>
+
+</form>
+    </center>
+{% endif %}
+
+{% if success %}
+<center>
+    <h1 style="background-color:green;">{{success}}</h1>
+</center>
+{% endif %}
+
+{% if user_data or test %}
+
+<center>
+<form action="{% url 'edit_details' id %}" method="post">
+    {% csrf_token %}
+
+<div style="margin: auto; width : 30%">
+    <div class="form-group">
+    <label for="exampleFormControlInput1">First Name</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" value="{{user_data.first_name}}" >
+  </div>
+
+    <div class="form-group">
+    <label for="exampleFormControlInput1">Last Name</label>
+    <input type="text" class="form-control" value="{{user_data.last_name}}">
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1">Username</label>
+    <input type="text" class="form-control" value="{{user_data.user_name}}">
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1">Email ID</label>
+    <input type="email" class="form-control" value="{{user_data.Email}}">
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1">Password</label>
+    <input type="password" class="form-control" value="{{user_data.Password}}">
+  </div>
+</div>
+    <div>
+        <input type="submit" value="Edit Details">
+    </div>
+</form>
+    </center>
+{% endif %}
+</body>
+</html>
